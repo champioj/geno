@@ -2,6 +2,7 @@ geno
 ====
 
 Geno is a golang tool to help generate generic package from an annotated package.
+It's goal is to experiment/reproduce the idea of generic pacakge developped in [this topic](https://groups.google.com/forum/#!searchin/golang-nuts/generic/golang-nuts/7G2CrXNhDI0/C-bAdXdbe9kJ)
 
 How does it work?
 -----------------
