@@ -1,7 +1,7 @@
 geno
 ====
 
-Geno is a golang tool to help generate generic package from an annotated package
+Geno is a golang tool to help generate generic package from an annotated package.
 
 How does it work?
 -----------------
@@ -18,7 +18,8 @@ If you need more than one specialized type, you can list them like this:
     type Key interface{}  // <gen:1>
     type Value interface{} // <gen:2>
     
-// Generating
+Generating
+----------
 
 Once you have an annotated package, you can generate specialized version with the geno tool.
 Geno will create a new package by replacing all instance of the annotated types with the one given in parameter.
@@ -37,4 +38,29 @@ It is possible to use types defined in other package. For example a list of list
     
 Import will be automatically added ... but beware of cyclic dependency!
 
-  
+Autogeneration
+--------------
+
+It's possible to add annotation to import so a single call to geno is able to generate every specialized package you need.
+Add the import as if the package were already created. Then annotate it with its specialization:
+
+    import(
+        "champioj/geno/list/intlist" // <gen:int>
+        "champioj/geno/list/intofIntlist" // <gen:champioj/geno/list/intlist.List>
+    )
+    
+You can observe that it mimic the parameters -package and -types from the geno tool.
+Once it done, you can make a single call to geno:
+
+    geno -recursive="user/foo/bar"
+    
+Geno will parse the package "user/foo/bar" and all it import recursively and automatically generate every specialized type it found.
+
+A word on cyclic dependencies
+---------
+
+The main drawback which is innerent to the logic of the progam is the problem of cyclic dependencies.
+It is not possible to declare a type in a package, and use a specialized package which use that type cause it would create a cyclic dependency. If you want to do it, you have to put your type in its own packge.
+I would gladly receive any idea on how to mitigate or solve this problem.
+
+
