@@ -26,16 +26,16 @@ Once you have an annotated package, you can generate specialized version with th
 Geno will create a new package by replacing all instance of the annotated types with the one given in parameter.
 The command
 
-    geno -package="champioj/geno/example/list/intlist -types="int"
+    geno -package="champioj/geno/example/list/intlist" -types="int"
     
 will create a new package named intlist with every instance of the type annotated with '<gen:1>' replaced with the int type. By convention, the name of the package is the base of the path and must be a subdirectory of the package you want to specialize.
 Multiple spesialized type are separated by a comma:
 
-    geno -package="champioj/geno/example/list/intlist -types="int,string"
+    geno -package="champioj/geno/example/list/intlist" -types="int,string"
     
 It is possible to use types defined in other package. For example a list of list of int would be:
 
-    geno -package="champioj/geno/example/list/intofIntlist -types="champioj/geno/example/list/intlist.List"
+    geno -package="champioj/geno/example/list/intofIntlist" -types="champioj/geno/example/list/intlist.List"
     
 Import will be automatically added ... but beware of cyclic dependency!
 
