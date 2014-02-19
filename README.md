@@ -26,16 +26,16 @@ Once you have an annotated package, you can generate specialized version with th
 Geno will create a new package by replacing all instance of the annotated types with the one given in parameter.
 The command
 
-    geno -package="champioj/geno/list/intlist -types="int"
+    geno -package="champioj/geno/example/list/intlist -types="int"
     
 will create a new package named intlist with every instance of the type annotated with '<gen:1>' replaced with the int type. By convention, the name of the package is the base of the path and must be a subdirectory of the package you want to specialize.
 Multiple spesialized type are separated by a comma:
 
-    geno -package="champioj/geno/list/intlist -types="int,string"
+    geno -package="champioj/geno/example/list/intlist -types="int,string"
     
 It is possible to use types defined in other package. For example a list of list of int would be:
 
-    geno -package="champioj/geno/list/intofIntlist -types="champioj/geno/list/intlist.List"
+    geno -package="champioj/geno/example/list/intofIntlist -types="champioj/geno/example/list/intlist.List"
     
 Import will be automatically added ... but beware of cyclic dependency!
 
@@ -46,8 +46,8 @@ It's possible to add annotation to import so a single call to geno is able to ge
 Add the import as if the package were already created. Then annotate it with its specialization:
 
     import(
-        "champioj/geno/list/intlist" // <gen:int>
-        "champioj/geno/list/intofIntlist" // <gen:champioj/geno/list/intlist.List>
+        "champioj/geno/example/list/intlist" // <gen:int>
+        "champioj/geno/example/list/intofIntlist" // <gen:champioj/geno/example/list/intlist.List>
     )
     
 You can observe that it mimic the parameters -package and -types from the geno tool.
@@ -60,7 +60,7 @@ Geno will parse the package "user/foo/bar" and all it import recursively and aut
 A word on cyclic dependencies
 ---------
 
-The main drawback which is innerent to the logic of the progam is the problem of cyclic dependencies.
+The main drawback which is inherent to the logic of the program is the problem of cyclic dependencies.
 It is not possible to declare a type in a package, and use a specialized package which use that type cause it would create a cyclic dependency. If you want to do it, you have to put your type in its own packge.
 I would gladly receive any idea on how to mitigate or solve this problem.
 
