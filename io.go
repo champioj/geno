@@ -18,7 +18,7 @@ import (
 // it will create the package folder if needed and overwrite files
 func writeToDisk(pack *ast.Package, fset *token.FileSet, packagePath string) {
 	fullPath := filepath.Join(build.Default.GOPATH, "src", packagePath)
-	errorDir := os.Mkdir(fullPath, os.ModeDir)
+	errorDir := os.Mkdir(fullPath, 0775)
 	if errorDir != nil && !os.IsExist(errorDir) {
 		fmt.Println(errorDir)
 	}
